@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    nav .header-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      border-radius: 20px;
+    }
     .info-sections {
       display: flex;
       justify-content: space-between;
@@ -142,72 +147,26 @@
       left: 0;
       width: 100%;
       z-index: 9999;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.3); /* semi-transparent background */
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 0.5rem 2rem; /* reduced padding for smaller header */
     }
 
     header nav .logo {
       font-weight: bold;
-      font-size: 1.8rem;
-      color: #007acc;
-      display: flex;
-      align-items: center;
-    }
-
-    header nav .logo img {
-      height: 45px;
-      margin-right: 10px;
-    }
-
-    header nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
+      font-size: 2rem; /* increased from 1.5rem */
+      color: #000;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
     }
 
     header nav ul li a {
       text-decoration: none;
-      color: #007acc;
+      color: #000;
       font-weight: 500;
-      font-size: 1.1rem;
-      transition: color 0.3s;
-    }
-
-    header nav ul li a:hover {
-      color: #005f99;
-    }
-
-    header nav .btn {
-      background-color: #007acc;
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border-radius: 25px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-
-    header nav .btn:hover {
-      background-color: #005f99;
-    }
-
-    /* Mobile Menu */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-    }
-
-    .menu-toggle span {
-      width: 25px;
-      height: 3px;
-      background: #007acc;
-      border-radius: 2px;
+      font-size: 1.2rem; /* increased from default */
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
     }
 
     .hero {
@@ -222,33 +181,7 @@
       text-align: center;
       color: #fff;
       padding: 0 1rem;
-      padding-top: 100px;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 1.5rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .hero-btn {
-      background-color: #ff8c00;
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border-radius: 25px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-
-    .hero-btn:hover {
-      background-color: #ff7000;
+      padding-top: 60px; /* adjusted for smaller header */
     }
 
     .cards {
@@ -335,36 +268,49 @@
     /* Responsive Design */
     @media (max-width: 768px) {
       header nav {
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: flex-start;
         padding: 0.5rem 1rem;
-      }
-
-      .menu-toggle {
-        display: flex;
       }
 
       header nav ul {
         flex-direction: column;
-        width: 100%;
-        display: none;
-        margin-top: 10px;
         gap: 1rem;
+        width: 100%;
       }
 
-      header nav ul.active {
-        display: flex;
-      }
-
-      header nav .btn {
-        margin-top: 10px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
+      header nav ul li a {
         font-size: 1rem;
+      }
+
+      .hero {
+        padding-top: 80px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        height: auto;
+      }
+
+      .cards, .packages {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card, .package {
+        width: 90%;
+        max-width: 400px;
+        margin-bottom: 1.5rem;
+      }
+
+      .package h3 {
+        font-size: 1.3rem;
+      }
+
+      .package p {
+        font-size: 0.95rem;
+      }
+
+      header nav .logo {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -374,13 +320,8 @@
   <header>
     <nav>
       <div class="logo">
-        <img src="logo.png" alt="Nu Voyage Logo">
+        <img src="logo.png" alt="Nu Voyage Logo" style="height:40px; vertical-align: middle; margin-right:10px;">
         Nu Voyage
-      </div>
-      <div class="menu-toggle" id="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
       </div>
       <ul class="nav-links">
         <li><a href="#destinations">Destinations</a></li>
@@ -388,7 +329,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="https://wa.me/23058776225" target="_blank" class="btn">Book Now</a>
+      <a href="https://wa.me/23058776225" target="_blank" class="btn header-btn">Book Now</a>
     </nav>
     <div class="hero">
       <h1>Discover Your Next Adventure</h1>
@@ -468,13 +409,6 @@
     <p>&copy; 2025 Nu Voyage by Carnival Eco Crew Ltd. All rights reserved.</p>
   </footer>
 
-  <script>
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('header nav ul');
-
-    mobileMenu.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
