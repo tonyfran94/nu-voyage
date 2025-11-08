@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore the World</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .info-sections {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 2rem auto;
+    }
+
+    #about, #contact {
+      flex: 1 1 45%;
+    }
+
+    @media (max-width: 768px) {
+      .info-sections {
+        flex-direction: column;
+        margin: 2rem 1rem;
+      }
+
+      #about, #contact {
+        flex: 1 1 100%;
+        margin-bottom: 2rem;
+      }
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Enhanced Contact Section */
+    #contact {
+      background: linear-gradient(135deg, #c0f0f0, #a0e0ff);
+      padding: 4rem 2rem;
+      border-radius: 15px;
+      margin: 2rem auto;
+      max-width: 800px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      color: #333;
+    }
+
+    #contact h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #007acc;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    }
+
+    #contact p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    #contact form input,
+    #contact form textarea {
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+    }
+
+    #contact form button.btn {
+      background-color: #007acc;
+      color: #fff;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #contact form button.btn:hover {
+      background-color: #005f99;
+    }
+
+    #contact a {
+      color: #007acc;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    #contact a:hover {
+      color: #005f99;
+    }
+
+    /* Enhanced About Section Styling */
+    #about {
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      padding: 4rem 2rem;
+      border-radius: 15px;
+      margin: 2rem auto;
+      max-width: 1000px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      color: #333;
+    }
+
+    #about h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      color: #ff6b00;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    }
+
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    #about p:hover {
+      color: #ff8c00;
+      transition: color 0.3s;
+    }
+
+    header nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+      background-color: rgba(255, 255, 255, 0.3); /* semi-transparent background */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 2rem; /* reduced padding for smaller header */
+    }
+
+    header nav .logo {
+      font-weight: bold;
+      font-size: 2rem; /* increased from 1.5rem */
+      color: #000;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+
+    header nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+      font-size: 1.2rem; /* increased from default */
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+
+    .hero {
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 1rem;
+      padding-top: 60px; /* adjusted for smaller header */
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 300px;
+      height: 250px;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      background-size: cover;
+      background-position: center;
+      margin: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+      margin: 0 0 0.5rem 0;
+    }
+    .card p {
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    }
+    /* Enhanced Travel Packages Styling */
+    .packages {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .package {
+      background: linear-gradient(145deg, #ff8c00, #ffc266);
+      border-radius: 15px;
+      padding: 2rem;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #fff;
+    }
+
+    .package:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+    }
+
+    .package h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .package p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .package a.btn {
+      background-color: #fff;
+      color: #ff8c00;
+      padding: 0.7rem 1.2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .package a.btn:hover {
+      background-color: #ff8c00;
+      color: #fff;
+    }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.5rem 1rem;
+      }
+
+      header nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      header nav ul li a {
+        font-size: 1rem;
+      }
+
+      .hero {
+        padding-top: 80px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        height: auto;
+      }
+
+      .cards, .packages {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card, .package {
+        width: 90%;
+        max-width: 400px;
+        margin-bottom: 1.5rem;
+      }
+
+      .package h3 {
+        font-size: 1.3rem;
+      }
+
+      .package p {
+        font-size: 0.95rem;
+      }
+
+      header nav .logo {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo.png" alt="Nu Voyage Logo" style="height:40px; vertical-align: middle; margin-right:10px;">
+        Nu Voyage
+      </div>
+      <ul class="nav-links">
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://wa.me/23058776225" target="_blank" class="btn">Book Now</a>
+    </nav>
+    <div class="hero">
+      <h1>Discover Your Next Adventure</h1>
+      <p>Explore amazing destinations around the world with Nu Voyage</p>
+      <a href="#destinations" class="btn hero-btn">Get Started</a>
+    </div>
+  </header>
+
+  <!-- Destinations Section -->
+  <section id="destinations">
+    <h2>Popular Destinations</h2>
+    <div class="cards">
+      <div class="card" style="background-image: url('paris.jpg'); background-size: cover; background-position: center;">
+        <h3>Paris, France</h3>
+        <p>The city of lights, love, and culture.</p>
+      </div>
+      <div class="card" style="background-image: url('bali.jpg'); background-size: cover; background-position: center;">
+        <h3>Bali, Indonesia</h3>
+        <p>Tropical paradise with beaches and adventures.</p>
+      </div>
+      <div class="card" style="background-image: url('rome.jpg'); background-size: cover; background-position: center;">
+        <h3>Rome, Italy</h3>
+        <p>Historical landmarks, food, and ancient wonders.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages Section -->
+  <section id="packages">
+    <h2>Travel Packages</h2>
+    <div class="packages">
+      <div class="package">
+        <h3>Weekend Getaway</h3>
+        <p>2 days, 1 night at your favorite destination.</p>
+        <a href="https://wa.me/23058776225" target="_blank" class="btn">Book Now</a>
+      </div>
+      <div class="package">
+        <h3>Adventure Trip</h3>
+        <p>5 days of exciting activities and exploration.</p>
+        <a href="https://wa.me/23058776225" target="_blank" class="btn">Book Now</a>
+      </div>
+      <div class="package">
+        <h3>Luxury Escape</h3>
+        <p>7 days of premium accommodations and tours.</p>
+        <a href="https://wa.me/23058776225" target="_blank" class="btn">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About & Contact Sections Side by Side -->
+  <div class="info-sections">
+    <section id="about">
+      <h2>About Nu Voyage</h2>
+      <p>Nu Voyage is a proudly Rodriguan travel company dedicated to delivering exceptional travel experiences worldwide.</p>
+      <p>Our mission is to provide personalized travel solutions that cater to the unique preferences of each traveler, ensuring unforgettable journeys.</p>
+      <p>We offer comprehensive services including <strong>visa assistance, travel insurance, flights, hotel accommodations, and cruise bookings</strong>, simplifying every aspect of your trip.</p>
+      <p>Our team specializes in designing <strong>customized travel packages</strong> at competitive rates, tailored to meet your specific travel needs.</p>
+      <p>Whether you seek leisure, adventure, or luxury, Nu Voyage is committed to crafting seamless and memorable travel experiences for every client.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>You can reach us via WhatsApp or email:</p>
+      <p>WhatsApp: <a href="https://wa.me/23058776225" target="_blank">+230 5877 6225</a></p>
+      <p>Email: <a href="mailto:carnivalecocrewltd@gmail.com">carnivalecocrewltd@gmail.com</a></p>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <textarea placeholder="Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Nu Voyage by Carnival Eco Crew Ltd. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
