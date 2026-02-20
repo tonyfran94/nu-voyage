@@ -7,8 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Your existing styles remain unchanged — only adding flight search styles below */
-
+    /* ──────────────────────────────────────────────
+       Your existing styles remain unchanged
+       Only flight-related styles below (enhanced a bit)
+    ────────────────────────────────────────────── */
     #flights-demo {
       background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
       padding: 4rem 2rem;
@@ -22,7 +24,7 @@
     #flights-demo h2 {
       text-align: center;
       font-size: 2.2rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       color: #00796b;
     }
 
@@ -57,11 +59,18 @@
       cursor: pointer;
       font-weight: bold;
       transition: background 0.3s;
-      grid-column: span 1;
     }
 
     #flight-form button:hover {
       background-color: #004d40;
+    }
+
+    #flight-form .helper-text {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 0.4rem;
+      grid-column: 1 / -1;
+      text-align: center;
     }
 
     #results {
@@ -78,14 +87,40 @@
     }
 
     .flight-card h4 {
-      margin: 0 0 0.6rem;
+      margin: 0 0 0.8rem;
       color: #00796b;
     }
 
-    .no-results {
+    .no-results, .error-msg {
       text-align: center;
-      color: #d32f2f;
+      padding: 1.5rem;
+      border-radius: 10px;
       font-size: 1.1rem;
+    }
+
+    .no-results  { color: #d32f2f; background: #ffebee; }
+    .error-msg   { color: #c62828; background: #ffebee; }
+
+    .loading {
+      text-align: center;
+      color: #00796b;
+      font-size: 1.2rem;
+      padding: 2rem;
+    }
+
+    .spinner {
+      border: 5px solid #e0f2f1;
+      border-top: 5px solid #00796b;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     @media (max-width: 768px) {
@@ -97,110 +132,135 @@
 </head>
 <body>
 
-  <!-- Your existing header, hero, nav unchanged -->
+  <!-- Your existing header, hero, nav, destinations, packages, etc. -->
 
-  <!-- Destinations Section (unchanged) -->
-  <section id="destinations">
-    <h2>Popular Destinations</h2>
-    <div class="cards">
-      <!-- ... your cards ... -->
-    </div>
-  </section>
-
-  <!-- Packages Section (unchanged) -->
-  <section id="packages">
-    <h2>Travel Packages</h2>
-    <div class="packages">
-      <!-- ... your packages ... -->
-    </div>
-  </section>
-
-  <!-- New: Flight Search Demo Section -->
+  <!-- Flight Search Demo Section -->
   <section id="flights-demo">
     <h2>Search Real Flights (Demo)</h2>
-    <p class="note">Powered by real-time aviation data. For demonstration only — contact us via WhatsApp for actual bookings, best prices & personalized options.</p>
+    <p class="note">
+      Powered by real-time aviation data. For demonstration only — 
+      <strong>contact us via WhatsApp</strong> for actual bookings, best prices & personalized options.
+    </p>
 
     <form id="flight-form">
-      <input type="text" id="dep_iata" placeholder="From (IATA code, e.g. MRU)" required maxlength="3">
-      <input type="text" id="arr_iata" placeholder="To (IATA code, e.g. CDG)" required maxlength="3">
-      <input type="date" id="flight_date" required>
+      <div>
+        <input type="text" id="dep_iata" placeholder="From (IATA code, e.g. MRU)" required maxlength="3" autocomplete="off">
+        <div class="helper-text">Examples: MRU, CDG, DXB, JFK, NRT, JNB, RUN</div>
+      </div>
+
+      <div>
+        <input type="text" id="arr_iata" placeholder="To (IATA code, e.g. CDG)" required maxlength="3" autocomplete="off">
+        <div class="helper-text">Examples: MRU, CDG, DXB, JFK, NRT, JNB, RUN</div>
+      </div>
+
+      <input type="date" id="flight_date" required min="2026-02-21">
+
       <button type="submit">Search Flights</button>
     </form>
 
     <div id="results"></div>
   </section>
 
-  <!-- About & Contact Sections (unchanged) -->
-  <div class="info-sections">
-    <!-- ... your about & contact ... -->
-  </div>
-
-  <!-- Footer (unchanged) -->
-  <footer>
-    <p>© 2025 Nu Voyage by Carnival Eco Crew Ltd. All rights reserved.</p>
-  </footer>
+  <!-- Your existing about, contact, footer... -->
 
   <script>
-    // Your existing script.js content (if any) can stay here
-
-    // Flight search logic
+    // Flight search logic ─ improved version
     document.getElementById('flight-form').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '<p style="text-align:center; color:#00796b;">Searching real flights...</p>';
+      resultsDiv.innerHTML = `
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Searching real-time flights...</p>
+        </div>
+      `;
 
       const dep = document.getElementById('dep_iata').value.trim().toUpperCase();
       const arr = document.getElementById('arr_iata').value.trim().toUpperCase();
       const date = document.getElementById('flight_date').value;
 
-      if (!dep || !arr || !date) {
-        resultsDiv.innerHTML = '<p class="no-results">Please fill all fields.</p>';
+      // Basic client-side validation
+      if (!/^[A-Z]{3}$/.test(dep) || !/^[A-Z]{3}$/.test(arr)) {
+        resultsDiv.innerHTML = '<p class="error-msg">Please enter valid 3-letter IATA codes (e.g. MRU, CDG).</p>';
         return;
       }
 
-      const apiKey = 'YOUR_ACCESS_KEY_HERE';  // ← Replace with your Aviationstack key
-      const url = `http://api.aviationstack.com/v1/flights?access_key=${apiKey}&dep_iata=${dep}&arr_iata=${arr}&flight_date=${date}&limit=10`;
+      if (!date) {
+        resultsDiv.innerHTML = '<p class="error-msg">Please select a departure date.</p>';
+        return;
+      }
+
+      // ────────────────────────────────────────
+      //   Replace with YOUR real key!
+      //   Get free key (100 req/mo): https://aviationstack.com/
+      // ────────────────────────────────────────
+      const apiKey = 'YOUR_ACCESS_KEY_HERE';
+
+      const url = `http://api.aviationstack.com/v1/flights` +
+                  `?access_key=${apiKey}` +
+                  `&dep_iata=${dep}` +
+                  `&arr_iata=${arr}` +
+                  `&flight_date=${date}` +
+                  `&limit=15`;   // increased a bit (max usually 100)
 
       try {
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
         const data = await response.json();
 
         if (data.error) {
-          resultsDiv.innerHTML = `<p class="no-results">API error: ${data.error.info || 'Unknown issue'}</p>`;
+          resultsDiv.innerHTML = `<p class="error-msg">API error: ${data.error.info || data.error.message || 'Unknown issue'}</p>`;
           return;
         }
 
-        if (!data.pagination || data.pagination.total === 0 || !data.data || data.data.length === 0) {
-          resultsDiv.innerHTML = '<p class="no-results">No flights found for this route/date. Try other dates or airports!</p>';
+        if (!data.data || data.data.length === 0) {
+          resultsDiv.innerHTML = `
+            <p class="no-results">
+              No flights found for ${dep} → ${arr} on ${date}.<br>
+              Try nearby dates or different airports.<br><br>
+              For real bookings & best prices — message us on WhatsApp!
+            </p>`;
           return;
         }
 
-        let html = '';
+        let html = '<h3 style="text-align:center; color:#00796b; margin-bottom:1.5rem;">Found Flights</h3>';
+
         data.data.forEach(flight => {
-          const airline = flight.airline?.name || 'Unknown Airline';
-          const flightNum = flight.flight?.iata || flight.flight?.icao || 'N/A';
-          const depTime = flight.departure?.scheduled || 'N/A';
-          const arrTime = flight.arrival?.scheduled || 'N/A';
-          const status = flight.flight_status || 'N/A';
+          const airline    = flight.airline?.name        || 'Unknown Airline';
+          const flightNum  = flight.flight?.iata || flight.flight?.icao || '—';
+          const depTime    = flight.departure?.scheduled?.replace('T', ' ') || '—';
+          const arrTime    = flight.arrival?.scheduled?.replace('T', ' ')   || '—';
+          const status     = flight.flight_status || 'Scheduled';
+          const depAirport = flight.departure?.airport || flight.departure?.iata || '';
+          const arrAirport = flight.arrival?.airport   || flight.arrival?.iata   || '';
 
           html += `
             <div class="flight-card">
               <h4>${airline} ${flightNum}</h4>
-              <p><strong>Departure:</strong> ${depTime} from ${flight.departure?.iata} (${flight.departure?.airport || ''})</p>
-              <p><strong>Arrival:</strong> ${arrTime} at ${flight.arrival?.iata} (${flight.arrival?.airport || ''})</p>
-              <p><strong>Status:</strong> ${status}</p>
+              <p><strong>Departure:</strong> ${depTime} from ${dep} (${depAirport})</p>
+              <p><strong>Arrival:</strong> ${arrTime} at ${arr} (${arrAirport})</p>
+              <p><strong>Status:</strong> <span style="text-transform:capitalize;">${status}</span></p>
             </div>
           `;
         });
 
         resultsDiv.innerHTML = html;
+
       } catch (err) {
-        resultsDiv.innerHTML = '<p class="no-results">Error loading data. Check your connection or API key.</p>';
         console.error(err);
+        let msg = 'Error loading flight data. Please try again later.';
+        if (err.message.includes('YOUR_ACCESS_KEY_HERE')) {
+          msg = 'API key missing — please add your Aviationstack key in the code.';
+        } else if (err.message.includes('429')) {
+          msg = 'API limit reached (free plan = 100 req/month). Try tomorrow or contact us directly!';
+        }
+        resultsDiv.innerHTML = `<p class="error-msg">${msg}</p>`;
       }
     });
   </script>
-
 </body>
 </html>
