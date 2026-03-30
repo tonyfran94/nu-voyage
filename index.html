@@ -407,32 +407,70 @@ Book Now
 
 </section>
 
+<section id="flights">
+
+<h2>Search Flights</h2>
+
+<p>Find the best deals instantly. Choose your route and travel date, then jump to Skyscanner.</p>
+
+<form id="skyscannerForm" onsubmit="openSkyscanner(event)" style="max-width:500px;margin:auto;text-align:left;">
+    <label>From:</label>
+    <input type="text" id="fromAirport" placeholder="Origin e.g. RRG" required style="width:100%;padding:0.8rem;border-radius:8px;border:1px solid #ccc;margin-bottom:0.75rem;">
+    <label>To:</label>
+    <input type="text" id="toAirport" placeholder="Destination e.g. MRU" required style="width:100%;padding:0.8rem;border-radius:8px;border:1px solid #ccc;margin-bottom:0.75rem;">
+    <label>Departure Date:</label>
+    <input type="date" id="departDate" required style="width:100%;padding:0.8rem;border-radius:8px;border:1px solid #ccc;margin-bottom:0.75rem;">
+    <button class="btn" type="submit">Search on Skyscanner</button>
+</form>
+
+<script>
+function openSkyscanner(event){
+    event.preventDefault();
+    var from = document.getElementById('fromAirport').value.trim().toUpperCase();
+    var to = document.getElementById('toAirport').value.trim().toUpperCase();
+    var date = document.getElementById('departDate').value;
+    if(!from || !to || !date){
+        alert('Please fill all fields before searching.');
+        return;
+    }
+    // Skyscanner URL format: https://www.skyscanner.net/transport/flights/{from}/{to}/{yyyy-mm-dd}/
+    var formattedDate = date.replace(/-/g, '-');
+    var url = 'https://www.skyscanner.net/transport/flights/' + encodeURIComponent(from) + '/' + encodeURIComponent(to) + '/' + encodeURIComponent(formattedDate) + '/';
+    window.open(url, '_blank');
+}
+</script>
+
 <section id="payment">
 
-<h2>QR Code Payment</h2>
+<h2>MCB JUIC QR Code Payment</h2>
 
-<p>Scan the QR code to pay using mobile banking.</p>
+<p>Scan the correct QR code with your preferred app. Default is MCB JUIC.</p>
 
 <div class="payment-box">
 
-<img src="payment-qr.png" alt="QR Payment">
-
 <div class="payment-info">
 
-<p>Supported payment apps:</p>
+<p><strong>Select payment method:</strong></p>
+<select id="paymentMethod" onchange="updatePaymentMethod()" style="width:100%;padding:0.8rem;border-radius:8px;border:1px solid #ccc;margin-bottom:1rem;">
+<option value="mcb">MCB JUIC</option>
+<option value="myt">My.T Money</option>
+<option value="blink">Blink</option>
+</select>
+
+<img id="qrImage" src="mcb-juice-qr.png" alt="MCB JUIC QR" style="width:220px;border-radius:10px;box-shadow:0 6px 15px rgba(0,0,0,0.15);margin-bottom:1rem;">
+
+<p id="paymentInstruction">Open MCB Juice and scan the QR code above to complete the payment. For other wallets, switch the payment method list.</p>
 
 <ul>
-<li>MCB Juice</li>
+<li><strong>MCB Juice</strong> (preferred)</li>
 <li>My.T Money</li>
 <li>Blink</li>
 </ul>
 
-<p>After payment send confirmation on WhatsApp.</p>
+<p>After payment, send confirmation on WhatsApp so we can validate your booking immediately.</p>
 
 <a href="https://wa.me/23058776225?text=Hello%20Nu%20Voyage%20I%20have%20completed%20my%20payment." class="btn">
-
 Send Confirmation
-
 </a>
 
 </div>
@@ -500,7 +538,27 @@ style="border:0;border-radius:10px;margin-top:20px;">
 <script>
 
 function toggleMenu(){
-document.querySelector(".nav-links").classList.toggle("active");
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+
+function updatePaymentMethod(){
+    var method = document.getElementById('paymentMethod').value;
+    var qrImage = document.getElementById('qrImage');
+    var paymentInstruction = document.getElementById('paymentInstruction');
+
+    if (method === 'mcb') {
+        qrImage.src = 'mcb-juice-qr.png';
+        qrImage.alt = 'MCB JUIC QR';
+        paymentInstruction.textContent = 'Scan this MCB JUIC QR to pay directly through MCB JUIC. Use the app to confirm the transaction and then send confirmation on WhatsApp.';
+    } else if (method === 'myt') {
+        qrImage.src = 'myt-money-qr.png';
+        qrImage.alt = 'My.T Money QR';
+        paymentInstruction.textContent = 'Scan this My.T Money QR code to pay. After payment, notify us on WhatsApp with your name and package.';
+    } else if (method === 'blink') {
+        qrImage.src = 'blink-qr.png';
+        qrImage.alt = 'Blink QR';
+        paymentInstruction.textContent = 'Scan this Blink QR code and complete payment. Then send confirmation via WhatsApp.';
+    }
 }
 
 </script>
