@@ -43,3 +43,12 @@ window.addEventListener('scroll', () => {
     header.classList.remove('nav-black');
   }
 });
+  const sectionHeight = destinationsSection.offsetHeight;
+
+  // Apply nav-black once scrolled past the bottom of Popular Destinations
+  if (scrollY >= sectionTop + sectionHeight) {
+    header.classList.add('nav-black');
+  } else {
+    header.classList.remove('nav-black');
+  }
+});
