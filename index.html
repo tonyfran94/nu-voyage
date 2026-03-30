@@ -3,336 +3,507 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Explore the World</title>
+
+<title>Nu Voyage | Travel from Rodrigues</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-html {
-  scroll-behavior: smooth;
+
+html{
+scroll-behavior:smooth;
 }
 
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f5f5f5;
+body{
+margin:0;
+font-family:'Roboto',sans-serif;
+background:#f5f5f5;
 }
 
-/* ========== NAVIGATION ========== */
+/* NAVBAR */
 
-header nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9999;
-  background: rgba(255,255,255,0.85);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+header nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:9999;
+background:rgba(255,255,255,0.9);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0.8rem 2rem;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1.8rem;
-  display: flex;
-  align-items: center;
+.logo{
+font-size:1.6rem;
+font-weight:bold;
+display:flex;
+align-items:center;
 }
 
-.logo img {
-  height: 40px;
-  margin-right: 10px;
+.logo img{
+height:40px;
+margin-right:10px;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-  padding: 0;
-  margin: 0;
+.nav-links{
+list-style:none;
+display:flex;
+gap:2rem;
+margin:0;
+padding:0;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: #000;
-  font-weight: 500;
+.nav-links a{
+text-decoration:none;
+color:#000;
+font-weight:500;
 }
 
-/* ========== BUTTONS ========== */
-
-.btn {
-  background: #007acc;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-  display: inline-block;
+.menu-toggle{
+display:none;
+font-size:28px;
+cursor:pointer;
 }
 
-.btn:hover {
-  background: #005f99;
+/* BUTTONS */
+
+.btn{
+background:#007acc;
+color:white;
+padding:0.6rem 1.3rem;
+border-radius:25px;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+display:inline-block;
 }
 
-.header-btn {
-  font-size: 0.85rem;
+.btn:hover{
+background:#005f99;
 }
 
-/* ========== HERO ========== */
+/* HERO */
 
-.hero {
-  background: url('background.jpg') no-repeat center center/cover;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-  padding: 0 1rem;
-  margin-top: 80px;
+.hero{
+background:url('background.jpg') center/cover no-repeat;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+padding-top:80px;
+padding-left:1rem;
+padding-right:1rem;
 }
 
-.hero h1 {
-  font-size: 3rem;
+.hero h1{
+font-size:3rem;
 }
 
-/* ========== SECTIONS ========== */
+/* SECTIONS */
 
-section {
-  padding: 4rem 2rem;
-  text-align: center;
+section{
+padding:4rem 2rem;
+text-align:center;
 }
 
-h2 {
-  margin-bottom: 2rem;
+h2{
+margin-bottom:2rem;
 }
 
-/* ========== CARDS ========== */
+/* DESTINATION CARDS */
 
-.cards, .packages {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+.cards{
+display:flex;
+justify-content:center;
+gap:2rem;
+flex-wrap:wrap;
 }
 
-.card {
-  width: 300px;
-  height: 250px;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem;
-  color: white;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+.card{
+width:300px;
+height:250px;
+border-radius:12px;
+overflow:hidden;
+display:flex;
+align-items:flex-end;
+padding:1rem;
+color:white;
+background-size:cover;
+background-position:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+transition:0.4s;
 }
 
-.card h3 {
-  margin: 0;
+.card:hover{
+transform:scale(1.05);
 }
 
-/* ========== PACKAGES ========== */
-
-.package {
-  background: linear-gradient(145deg, #ff8c00, #ffc266);
-  border-radius: 15px;
-  padding: 2rem;
-  width: 250px;
-  color: white;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-  transition: 0.3s;
+.card h3{
+margin:0;
 }
 
-.package:hover {
-  transform: translateY(-8px);
+/* PACKAGES */
+
+.packages{
+display:flex;
+justify-content:center;
+gap:2rem;
+flex-wrap:wrap;
 }
 
-.package .btn {
-  background: white;
-  color: #ff8c00;
+.package{
+background:linear-gradient(145deg,#ff8c00,#ffc266);
+border-radius:15px;
+padding:2rem;
+width:250px;
+color:white;
+box-shadow:0 8px 15px rgba(0,0,0,0.2);
+transition:0.3s;
 }
 
-.package .btn:hover {
-  background: #ff8c00;
-  color: white;
+.package:hover{
+transform:translateY(-8px);
 }
 
-/* ========== ABOUT & CONTACT ========== */
-
-.info-sections {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 2rem auto;
+.package .btn{
+background:white;
+color:#ff8c00;
 }
 
-#about, #contact {
-  flex: 1 1 45%;
-  border-radius: 15px;
-  padding: 3rem 2rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+.package .btn:hover{
+background:#ff8c00;
+color:white;
 }
 
-#about {
-  background: linear-gradient(135deg, #ffecd2, #fcb69f);
-  text-align: justify;
+/* PAYMENT */
+
+#payment{
+background:white;
 }
 
-#contact {
-  background: linear-gradient(135deg, #c0f0f0, #a0e0ff);
+.payment-box{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:3rem;
+flex-wrap:wrap;
 }
 
-#contact form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
+.payment-box img{
+width:220px;
+border-radius:10px;
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
 
-#contact input,
-#contact textarea {
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+.payment-info{
+max-width:300px;
+text-align:left;
 }
 
-footer {
-  background: #111;
-  color: white;
-  text-align: center;
-  padding: 1.5rem;
-  margin-top: 3rem;
+/* INFO SECTIONS */
+
+.info-sections{
+display:flex;
+gap:2rem;
+flex-wrap:wrap;
+max-width:1200px;
+margin:auto;
 }
 
-/* ========== RESPONSIVE ========== */
-
-@media (max-width: 768px) {
-
-  .nav-links {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .info-sections {
-    flex-direction: column;
-    margin: 2rem 1rem;
-  }
-
-  #about, #contact {
-    flex: 1 1 100%;
-  }
-
-  .card, .package {
-    width: 90%;
-  }
+#about,#contact{
+flex:1 1 45%;
+padding:3rem 2rem;
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
 }
+
+#about{
+background:linear-gradient(135deg,#ffecd2,#fcb69f);
+text-align:justify;
+}
+
+#contact{
+background:linear-gradient(135deg,#c0f0f0,#a0e0ff);
+}
+
+#contact form{
+display:flex;
+flex-direction:column;
+gap:1rem;
+margin-top:1rem;
+}
+
+#contact input,#contact textarea{
+padding:0.8rem;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:1.5rem;
+margin-top:3rem;
+}
+
+/* WHATSAPP FLOAT */
+
+.whatsapp-float{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#25D366;
+color:white;
+font-size:28px;
+width:55px;
+height:55px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+text-decoration:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.nav-links{
+position:absolute;
+top:70px;
+right:0;
+background:white;
+flex-direction:column;
+width:200px;
+align-items:center;
+display:none;
+padding:20px;
+}
+
+.nav-links.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+}
+
+.hero h1{
+font-size:2rem;
+}
+
+.info-sections{
+flex-direction:column;
+}
+
+.card,.package{
+width:90%;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <nav>
-    <div class="logo">
-      <img src="logo.png" alt="Nu Voyage Logo">
-      Nu Voyage
-    </div>
 
-    <ul class="nav-links">
-      <li><a href="#destinations">Destinations</a></li>
-      <li><a href="#packages">Packages</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+<nav>
 
-    <a href="https://wa.me/23058776225?text=Hello%20Nu%20Voyage!%20I'm%20interested%20in%20booking%20a%20trip." 
-       target="_blank" 
-       class="btn header-btn">
-       Book Now
-    </a>
-  </nav>
+<div class="logo">
+<img src="logo.png">
+Nu Voyage
+</div>
 
-  <div class="hero">
-    <h1>Discover Your Next Adventure</h1>
-    <p>Explore amazing destinations around the world with Nu Voyage</p>
-    <a href="#destinations" class="btn">Get Started</a>
-  </div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<ul class="nav-links">
+
+<li><a href="#destinations">Destinations</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#payment">Payment</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+<a href="https://wa.me/23058776225?text=Hello%20Nu%20Voyage!%20I%20want%20to%20book%20a%20trip." 
+target="_blank"
+class="btn">
+Book Now
+</a>
+
+</nav>
+
+<div class="hero">
+
+<h1>Travel the World from Rodrigues</h1>
+<p>Affordable international trips for Rodrigues travellers</p>
+
+<a href="#destinations" class="btn">Explore Destinations</a>
+
+</div>
+
 </header>
 
 <section id="destinations">
-  <h2>Popular Destinations</h2>
-  <div class="cards">
-    <div class="card" style="background-image:url('paris.jpg')">
-      <h3>Paris, France</h3>
-    </div>
-    <div class="card" style="background-image:url('bali.jpg')">
-      <h3>Bali, Indonesia</h3>
-    </div>
-    <div class="card" style="background-image:url('rome.jpg')">
-      <h3>Rome, Italy</h3>
-    </div>
-  </div>
+
+<h2>Popular Destinations</h2>
+
+<div class="cards">
+
+<div class="card" style="background-image:url('paris.jpg')">
+<h3>Paris, France</h3>
+</div>
+
+<div class="card" style="background-image:url('bali.jpg')">
+<h3>Bali, Indonesia</h3>
+</div>
+
+<div class="card" style="background-image:url('rome.jpg')">
+<h3>Rome, Italy</h3>
+</div>
+
+</div>
+
 </section>
 
 <section id="packages">
-  <h2>Travel Packages</h2>
-  <div class="packages">
-    <div class="package">
-      <h3>Weekend Getaway</h3>
-      <p>2 days, 1 night.</p>
-      <a href="#" class="btn">Book Now</a>
-    </div>
-    <div class="package">
-      <h3>Adventure Trip</h3>
-      <p>5 days exploration.</p>
-      <a href="#" class="btn">Book Now</a>
-    </div>
-    <div class="package">
-      <h3>Luxury Escape</h3>
-      <p>7 days premium experience.</p>
-      <a href="#" class="btn">Book Now</a>
-    </div>
-  </div>
+
+<h2>Travel Packages</h2>
+
+<div class="packages">
+
+<div class="package">
+<h3>Mauritius Weekend</h3>
+<p>Rodrigues → Mauritius flight & hotel</p>
+<a href="#" class="btn">Book</a>
+</div>
+
+<div class="package">
+<h3>Dubai Holiday</h3>
+<p>7 day Dubai shopping experience</p>
+<a href="#" class="btn">Book</a>
+</div>
+
+<div class="package">
+<h3>Thailand Adventure</h3>
+<p>Bangkok + Phuket travel package</p>
+<a href="#" class="btn">Book</a>
+</div>
+
+</div>
+
+</section>
+
+<section id="payment">
+
+<h2>QR Code Payment</h2>
+
+<p>Scan the QR code to pay using mobile banking.</p>
+
+<div class="payment-box">
+
+<img src="payment-qr.png" alt="QR Payment">
+
+<div class="payment-info">
+
+<p>Supported payment apps:</p>
+
+<ul>
+<li>MCB Juice</li>
+<li>My.T Money</li>
+<li>Blink</li>
+</ul>
+
+<p>After payment send confirmation on WhatsApp.</p>
+
+<a href="https://wa.me/23058776225?text=Hello%20Nu%20Voyage%20I%20have%20completed%20my%20payment." class="btn">
+
+Send Confirmation
+
+</a>
+
+</div>
+
+</div>
+
 </section>
 
 <div class="info-sections">
 
 <section id="about">
-  <h2>About Nu Voyage</h2>
-  <p>Nu Voyage is a proudly Rodriguan travel company delivering exceptional travel experiences worldwide.</p>
+
+<h2>About Nu Voyage</h2>
+
+<p>
+
+Nu Voyage is a Rodriguan travel company helping residents of Rodrigues travel to Mauritius, Dubai, Europe and Asia with affordable travel packages and easy QR code payment options.
+
+</p>
+
 </section>
 
 <section id="contact">
-  <h2>Contact Us</h2>
-  <p>WhatsApp: +230 5877 6225</p>
-  <p>Email: carnivalecocrewltd@gmail.com</p>
 
-  <form>
-    <input type="text" placeholder="Your Name" required>
-    <input type="email" placeholder="Email Address" required>
-    <textarea placeholder="Message" required></textarea>
-    <button type="submit" class="btn">Send Message</button>
-  </form>
+<h2>Contact Us</h2>
+
+<p>WhatsApp: +230 5877 6225</p>
+<p>Email: carnivalecocrewltd@gmail.com</p>
+
+<form action="https://formsubmit.co/carnivalecocrewltd@gmail.com" method="POST">
+
+<input type="text" placeholder="Your Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<textarea placeholder="Message" required></textarea>
+
+<input type="hidden" name="_captcha" value="false">
+
+<button class="btn">Send Message</button>
+
+</form>
+
+<iframe
+src="https://maps.google.com/maps?q=rodrigues%20island&t=&z=13&ie=UTF8&iwloc=&output=embed"
+width="100%"
+height="250"
+style="border:0;border-radius:10px;margin-top:20px;">
+</iframe>
+
 </section>
 
 </div>
 
 <footer>
-  <p>© 2025 Nu Voyage by Carnival Eco Crew Ltd. All rights reserved.</p>
+
+<p>© 2025 Nu Voyage by Carnival Eco Crew Ltd.</p>
+
 </footer>
+
+<a href="https://wa.me/23058776225" class="whatsapp-float" target="_blank">
+💬
+</a>
+
+<script>
+
+function toggleMenu(){
+document.querySelector(".nav-links").classList.toggle("active");
+}
+
+</script>
 
 </body>
 </html>
